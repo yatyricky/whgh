@@ -1,0 +1,24 @@
+{
+  "name": "iag2gs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "live": "cp index.php /var/www/html/whgh/ && nohup node watcher.js > ./log 2>&1 &"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yatyricky/iag2gs.git"
+  },
+  "author": "Nef.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yatyricky/iag2gs/issues"
+  },
+  "homepage": "https://github.com/yatyricky/iag2gs#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "moment": "^2.21.0"
+  }
+}

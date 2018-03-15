@@ -20,7 +20,7 @@ const searchByTop = (num, chatId, sender) => {
         res.sort(lifeSorter);
         for (let i = 0; i < res.length && i < num; i++) {
             const element = res[i];
-            resp += `${element.player} [${element.name}](${element.link}) ${element.life.days}d ${element.life.hours}h ${element.life.minutes}m\n`;
+            resp += `${element.player} [${element.name}](${element.link}) ${element.life.days}**D**${element.life.hours}**H**${element.life.minutes}**M** ${element.distance}**Km**\n`;
         }
         const requestString = `https://api.telegram.org/bot${config.apikey}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(resp)}&parse_mode=markdown`;
         https.get(requestString, (res) => {
@@ -39,7 +39,7 @@ const searchByPlayer = (player, chatId, sender) => {
         for (let i = 0; i < res.length; i++) {
             const element = res[i];
             if (element.player.toLowerCase() == lowerPlayer) {
-                resp += `${element.player} [${element.name}](${element.link}) ${element.life.days}d ${element.life.hours}h ${element.life.minutes}m\n`;
+                resp += `${element.player} [${element.name}](${element.link}) ${element.life.days}**D**${element.life.hours}**H**${element.life.minutes}**M** ${element.distance}**Km**\n`;
                 foundNothing = false;
             }
         }

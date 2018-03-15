@@ -127,6 +127,6 @@ https.createServer({
 });
 
 const schedule = require('node-schedule');
-schedule.scheduleJob('* * * * *', () => {
+schedule.scheduleJob('0 8 * * *', () => {
     searchByTop(15, config.chatid[0], "");
 });

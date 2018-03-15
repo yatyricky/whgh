@@ -17,6 +17,9 @@ const lifeSorter = (a, b) => {
 const searchByTop = (num, chatId, sender) => {
     whgh((res) => {
         let resp = `@${sender} Query by top ${num}\n`;
+        if (sender == "") {
+            resp = `Daily report\n`;
+        }
         res.sort(lifeSorter);
         for (let i = 0; i < res.length && i < num; i++) {
             const element = res[i];
@@ -113,7 +116,7 @@ app.get('/', (req, res) => {
     } else {
         console.log(`E: Secret mismatch: ${query.secret} or wrong message`);
     }
-    
+
 });
 
 https.createServer({
@@ -121,4 +124,9 @@ https.createServer({
     key: fs.readFileSync(config.sslkey)
 }, app).listen(config.port, () => {
     console.log(`WHGH running on ${config.port}`);
+});
+
+const schedule = require('node-schedule');
+schedule.scheduleJob('* * * * *', () => {
+    searchByTop(15, config.chatid[0], "");
 });

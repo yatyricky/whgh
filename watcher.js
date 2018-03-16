@@ -42,7 +42,7 @@ const searchByPlayer = (player, chatId, sender) => {
         for (let i = 0; i < res.length; i++) {
             const element = res[i];
             if (element.player.toLowerCase() == lowerPlayer) {
-                resp += `${element.player} [${element.name}](${element.link}) *${element.life.days}d*:${element.life.hours}h:${element.life.minutes}m *${element.distance}km*\n`;
+                resp += `[${element.name}](${element.link}) *${element.life.days}d*:${element.life.hours}h:${element.life.minutes}m *${element.distance}km*\n`;
                 foundNothing = false;
             }
         }
@@ -82,7 +82,7 @@ app.get('/', (req, res) => {
             if (msgTokens[0] == '/ping') {
                 resp = "pong";
             } else if (msgTokens[0] == '/help') {
-                resp = "\n/ping 测试bot\n/list list 10 - 显示最高10个 list iroly - 显示萝莉的🍄 或者直接 list\n/help 获得帮助";
+                resp = "\n/ping 测试bot\n/list *list 10* - 显示最高10个 *list iroly* - 显示萝莉的🍄 或者直接 *list*\n/help 获得帮助";
             } else {
                 const paramTokens = msgTokens[0].split(' ');
                 if (paramTokens[0] == '/list') {
@@ -104,7 +104,7 @@ app.get('/', (req, res) => {
 
             // Make bot request
             if (resp != "") {
-                const requestString = encodeURI(`https://api.telegram.org/bot${config.apikey}/sendMessage?chat_id=${chatId}&text=@${sender} ${resp}`);
+                const requestString = encodeURI(`https://api.telegram.org/bot${config.apikey}/sendMessage?chat_id=${chatId}&text=@${sender} ${resp}&parse_mode=markdown`);
                 https.get(requestString, (res) => {
                 }).on('error', (e) => {
                     console.log(e);
@@ -128,5 +128,5 @@ https.createServer({
 
 const schedule = require('node-schedule');
 schedule.scheduleJob('0 8 * * *', () => {
-    searchByTop(15, config.chatid[0], "");
+    searchByTop(config.dailynumbers, config.chatid[0], "");
 });

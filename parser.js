@@ -40,7 +40,7 @@ const whgh = (callback) => {
                             minutes: realDays.minutes(),
                             seconds: realDays.seconds()
                         },
-                        distance: (getDistanceFromLatLonInKm(config.baseLat, config.baseLon, coords[0], coords[1])).toFixed(2)
+                        distance: (getDistanceFromLatLonInKm(parseFloat(config.baseLat), parseFloat(config.baseLon), coords[0], coords[1])).toFixed(2)
                     });
                 }
             }).on('close', () => {

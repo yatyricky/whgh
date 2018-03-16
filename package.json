@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "live": "cp index.php /var/www/html/whgh/ && nohup node watcher.js > ./log 2>&1 &"
+    "live": "cp index.php /var/www/html/whgh/ && nohup node watcher.js >> ./log 2>&1 &"
   },
   "repository": {
     "type": "git",

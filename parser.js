@@ -1,5 +1,6 @@
 const moment = require('moment');
 const fs = require('fs');
+const config = JSON.parse(fs.readFileSync('config/config.json'));
 const readline = require('readline');
 const path = require('path');
 const folder = path.join(__dirname, 'data');
@@ -39,7 +40,7 @@ const whgh = (callback) => {
                             minutes: realDays.minutes(),
                             seconds: realDays.seconds()
                         },
-                        distance: (getDistanceFromLatLonInKm(coords[0], coords[1], 30.546879, 114.296915)).toFixed(2)
+                        distance: (getDistanceFromLatLonInKm(config.baseLat, config.baseLon, coords[0], coords[1])).toFixed(2)
                     });
                 }
             }).on('close', () => {

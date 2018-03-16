@@ -25,7 +25,7 @@ const searchByTop = (num, chatId, sender) => {
             const element = res[i];
             resp += `${element.player} [${element.name}](${element.link}) *${element.life.days}d*:${element.life.hours}h:${element.life.minutes}m *${element.distance}km*\n`;
         }
-        const requestString = `https://api.telegram.org/bot${config.apikey}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(resp)}&parse_mode=markdown`;
+        const requestString = `https://api.telegram.org/bot${config.apikey}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(resp)}&parse_mode=markdown&disable_web_page_preview=true`;
         https.get(requestString, (res) => {
         }).on('error', (e) => {
             console.log(e);
@@ -49,7 +49,7 @@ const searchByPlayer = (player, chatId, sender) => {
         if (foundNothing) {
             resp += "Nothing found.";
         }
-        const requestString = (`https://api.telegram.org/bot${config.apikey}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(resp)}&parse_mode=markdown`);
+        const requestString = (`https://api.telegram.org/bot${config.apikey}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(resp)}&parse_mode=markdown&disable_web_page_preview=true`);
         https.get(requestString, (res) => {
         }).on('error', (e) => {
             console.log(e);
@@ -127,6 +127,6 @@ https.createServer({
 });
 
 const schedule = require('node-schedule');
-schedule.scheduleJob('0 8 * * *', () => {
+schedule.scheduleJob('0 0 * * *', () => {
     searchByTop(config.dailynumbers, config.chatid[0], "");
 });
